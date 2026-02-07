@@ -1,13 +1,16 @@
 import { z } from "zod";
 import { OPTIONS } from "./constants";
 
-const winnerEnum = z.enum(OPTIONS.winner as [string, ...string[]]);
-const overUnderEnum = z.enum(OPTIONS.overUnder as [string, ...string[]]);
-const mvpEnum = z.enum(OPTIONS.mvp as [string, ...string[]]);
-const receivingEnum = z.enum(OPTIONS.receiving as [string, ...string[]]);
-const rushingEnum = z.enum(OPTIONS.rushing as [string, ...string[]]);
-const badBunnyEnum = z.enum(OPTIONS.badBunny as [string, ...string[]]);
-const patriotsLoveEnum = z.enum(OPTIONS.patriotsLove as [string, ...string[]]);
+const enumFrom = <T extends readonly [string, ...string[]]>(values: T) =>
+  z.enum(values as unknown as [string, ...string[]]);
+
+const winnerEnum = enumFrom(OPTIONS.winner);
+const overUnderEnum = enumFrom(OPTIONS.overUnder);
+const mvpEnum = enumFrom(OPTIONS.mvp);
+const receivingEnum = enumFrom(OPTIONS.receiving);
+const rushingEnum = enumFrom(OPTIONS.rushing);
+const badBunnyEnum = enumFrom(OPTIONS.badBunny);
+const patriotsLoveEnum = enumFrom(OPTIONS.patriotsLove);
 
 export const submissionSchema = z.object({
   name: z
