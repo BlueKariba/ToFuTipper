@@ -46,7 +46,7 @@ export async function GET() {
     "MVP",
     "Most Receiving Yards",
     "Most Rushing Yards",
-    "Bad Bunny beleidigt?",
+    "Beleidigt Bad Bunny D.Trump in der Halbzeit?",
     "Warum ich die Patriots liebe",
     "Punkte"
   ];

@@ -28,7 +28,7 @@ async function createSubmission(page, name: string) {
   await page.getByLabel("Super Bowl MVP").selectOption(picks.mvp);
   await page.getByLabel("Most Receiving Yards").selectOption(picks.receiving);
   await page.getByLabel("Most Rushing Yards").selectOption(picks.rushing);
-  await page.getByLabel("Beleidigt Bad Bunny in der Halbzeit").selectOption(picks.badBunny);
+  await page.getByLabel("Beleidigt Bad Bunny D.Trump in der Halbzeit").selectOption(picks.badBunny);
   await page.getByLabel("Warum ich die Patriots liebe").selectOption(picks.patriotsLove);
   await page.getByRole("button", { name: "Tipp absenden" }).click();
 }
@@ -53,7 +53,7 @@ test("admin results update scoring", async ({ page }) => {
   await page.getByLabel("Super Bowl MVP").selectOption(picks.mvp);
   await page.getByLabel("Most Receiving Yards").selectOption(picks.receiving);
   await page.getByLabel("Most Rushing Yards").selectOption(picks.rushing);
-  await page.getByLabel("Beleidigt Bad Bunny in der Halbzeit").selectOption(picks.badBunny);
+  await page.getByLabel("Beleidigt Bad Bunny D.Trump in der Halbzeit").selectOption(picks.badBunny);
 
   await page.getByRole("button", { name: "Ergebnisse speichern" }).click();
 

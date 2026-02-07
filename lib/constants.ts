@@ -78,7 +78,7 @@ export const CATEGORY_LABELS = {
   mvp: "Super Bowl MVP",
   receiving: "Most Receiving Yards",
   rushing: "Most Rushing Yards",
-  badBunny: "Beleidigt Bad Bunny in der Halbzeit",
+  badBunny: "Beleidigt Bad Bunny D.Trump in der Halbzeit",
   patriotsLove: "Warum ich die Patriots liebe"
 } as const;
 

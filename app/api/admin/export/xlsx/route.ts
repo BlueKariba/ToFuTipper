@@ -32,7 +32,7 @@ export async function GET() {
     { header: "MVP", key: "mvp", width: 28 },
     { header: "Most Receiving Yards", key: "receiving", width: 28 },
     { header: "Most Rushing Yards", key: "rushing", width: 26 },
-    { header: "Bad Bunny beleidigt?", key: "badBunny", width: 22 },
+    { header: "Beleidigt Bad Bunny D.Trump in der Halbzeit?", key: "badBunny", width: 32 },
     { header: "Warum ich die Patriots liebe", key: "patriotsLove", width: 36 },
     { header: "Punkte", key: "score", width: 10 }
   ];
