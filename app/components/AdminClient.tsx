@@ -245,7 +245,7 @@ export default function AdminClient() {
           <div className="flex flex-col gap-2">
             <h2 className="text-2xl text-patriots-navy">Ergebnisse eintragen</h2>
             <p className="text-sm text-patriots-navy/70">
-              Kategorie "Warum ich die Patriots liebe" ist nur Fun und gibt 0 Punkte.
+              Kategorie &quot;Warum ich die Patriots liebe&quot; ist nur Fun und gibt 0 Punkte.
             </p>
             {results?.lockedAt ? (
               <span className="badge bg-patriots-silver text-patriots-navy">
