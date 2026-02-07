@@ -101,6 +101,10 @@ GitHub Actions Workflow in `.github/workflows/ci.yml`:
 - https://www.flagcolorcodes.com/new-england-patriots
 - https://teampalettes.com/nfl
 
+### Team Logos
+- https://commons.wikimedia.org/wiki/File:NFL_New_England_Patriots.svg
+- https://commons.wikimedia.org/wiki/File:NFL_Seattle_Seahawks.svg
+
 ### Depth Charts / Roster
 - https://www.patriots.com/team/depth-chart
 - https://www.seahawks.com/team/depth-chart

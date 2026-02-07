@@ -6,9 +6,9 @@ import {
   CATEGORY_LABELS,
   GAME,
   OPTIONS,
-  PROJECT_TITLE
+  PROJECT_TITLE,
+  TEAMS
 } from "@/lib/constants";
-import type { SubmissionInput } from "@/lib/validation";
 
 type DistributionItem = {
   option: string;
@@ -56,15 +56,26 @@ type OverviewData = {
   distributions: Record<string, DistributionItem[]>;
 };
 
-const initialForm: SubmissionInput = {
+type SubmissionFormState = {
+  name: string;
+  winner: string;
+  overUnder: string;
+  mvp: string;
+  receiving: string;
+  rushing: string;
+  badBunny: string;
+  patriotsLove: string;
+};
+
+const initialForm: SubmissionFormState = {
   name: "",
-  winner: OPTIONS.winner[0],
-  overUnder: OPTIONS.overUnder[0],
-  mvp: OPTIONS.mvp[0],
-  receiving: OPTIONS.receiving[0],
-  rushing: OPTIONS.rushing[0],
-  badBunny: OPTIONS.badBunny[0],
-  patriotsLove: OPTIONS.patriotsLove[0]
+  winner: "",
+  overUnder: "",
+  mvp: "",
+  receiving: "",
+  rushing: "",
+  badBunny: "",
+  patriotsLove: ""
 };
 
 const topEightKeys = new Set(["mvp", "receiving", "rushing"]);
@@ -103,7 +114,7 @@ function buildTopItems(
 
 export default function AppClient() {
   const [activeTab, setActiveTab] = useState<"tippen" | "gesamt">("tippen");
-  const [form, setForm] = useState<SubmissionInput>(initialForm);
+  const [form, setForm] = useState<SubmissionFormState>(initialForm);
   const [overview, setOverview] = useState<OverviewData | null>(null);
   const [meSubmission, setMeSubmission] = useState<OverviewSubmission | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -153,6 +164,22 @@ export default function AppClient() {
     setError(null);
     setSuccess(null);
 
+    const isFormComplete =
+      form.name.trim().length >= 2 &&
+      form.winner &&
+      form.overUnder &&
+      form.mvp &&
+      form.receiving &&
+      form.rushing &&
+      form.badBunny &&
+      form.patriotsLove;
+
+    if (!isFormComplete) {
+      setError("Bitte alle Felder ausfüllen.");
+      setSubmitting(false);
+      return;
+    }
+
     const res = await fetch("/api/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -189,6 +216,16 @@ export default function AppClient() {
     );
   }, [overview, topScore]);
 
+  const isFormComplete =
+    form.name.trim().length >= 2 &&
+    form.winner &&
+    form.overUnder &&
+    form.mvp &&
+    form.receiving &&
+    form.rushing &&
+    form.badBunny &&
+    form.patriotsLove;
+
   return (
     <main className="min-h-screen px-4 py-10">
       <div className="mx-auto max-w-6xl space-y-8">
@@ -199,7 +236,29 @@ export default function AppClient() {
                 {GAME.event}
               </p>
               <h1 className="text-4xl font-semibold">{PROJECT_TITLE}</h1>
-              <p className="mt-2 text-white/80">{GAME.teams}</p>
+              <div className="mt-3 flex flex-col gap-3 md:flex-row md:items-center">
+                <div className="flex items-center gap-3">
+                  <img
+                    src={TEAMS.patriots.logo}
+                    alt="New England Patriots Logo"
+                    className="h-12 w-auto rounded-xl bg-white/90 p-2"
+                  />
+                  <p className="text-lg font-semibold text-white">
+                    {TEAMS.patriots.name}
+                  </p>
+                </div>
+                <span className="badge bg-white/10 text-white">VS</span>
+                <div className="flex items-center gap-3">
+                  <img
+                    src={TEAMS.seahawks.logo}
+                    alt="Seattle Seahawks Logo"
+                    className="h-12 w-auto rounded-xl bg-white/90 p-2"
+                  />
+                  <p className="text-lg font-semibold text-white">
+                    {TEAMS.seahawks.name}
+                  </p>
+                </div>
+              </div>
             </div>
             <div className="rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-sm">
               <p>{GAME.date}</p>
@@ -335,7 +394,11 @@ export default function AppClient() {
                         onChange={(event) =>
                           setForm((prev) => ({ ...prev, winner: event.target.value }))
                         }
+                        required
                       >
+                        <option value="" disabled>
+                          Bitte auswählen...
+                        </option>
                         {OPTIONS.winner.map((option) => (
                           <option key={option} value={option}>
                             {option}
@@ -357,7 +420,11 @@ export default function AppClient() {
                         onChange={(event) =>
                           setForm((prev) => ({ ...prev, overUnder: event.target.value }))
                         }
+                        required
                       >
+                        <option value="" disabled>
+                          Bitte auswählen...
+                        </option>
                         {OPTIONS.overUnder.map((option) => (
                           <option key={option} value={option}>
                             {option}
@@ -379,7 +446,11 @@ export default function AppClient() {
                         onChange={(event) =>
                           setForm((prev) => ({ ...prev, mvp: event.target.value }))
                         }
+                        required
                       >
+                        <option value="" disabled>
+                          Bitte auswählen...
+                        </option>
                         {OPTIONS.mvp.map((option) => (
                           <option key={option} value={option}>
                             {option}
@@ -401,7 +472,11 @@ export default function AppClient() {
                         onChange={(event) =>
                           setForm((prev) => ({ ...prev, receiving: event.target.value }))
                         }
+                        required
                       >
+                        <option value="" disabled>
+                          Bitte auswählen...
+                        </option>
                         {OPTIONS.receiving.map((option) => (
                           <option key={option} value={option}>
                             {option}
@@ -423,7 +498,11 @@ export default function AppClient() {
                         onChange={(event) =>
                           setForm((prev) => ({ ...prev, rushing: event.target.value }))
                         }
+                        required
                       >
+                        <option value="" disabled>
+                          Bitte auswählen...
+                        </option>
                         {OPTIONS.rushing.map((option) => (
                           <option key={option} value={option}>
                             {option}
@@ -445,7 +524,11 @@ export default function AppClient() {
                         onChange={(event) =>
                           setForm((prev) => ({ ...prev, badBunny: event.target.value }))
                         }
+                        required
                       >
+                        <option value="" disabled>
+                          Bitte auswählen...
+                        </option>
                         {OPTIONS.badBunny.map((option) => (
                           <option key={option} value={option}>
                             {option}
@@ -470,7 +553,11 @@ export default function AppClient() {
                             patriotsLove: event.target.value
                           }))
                         }
+                        required
                       >
+                        <option value="" disabled>
+                          Bitte auswählen...
+                        </option>
                         {OPTIONS.patriotsLove.map((option) => (
                           <option key={option} value={option}>
                             {option}
@@ -487,7 +574,11 @@ export default function AppClient() {
                     <p className="text-sm text-patriots-navy">{success}</p>
                   ) : null}
 
-                  <button className="btn-primary" type="submit" disabled={submitting}>
+                  <button
+                    className="btn-primary"
+                    type="submit"
+                    disabled={!isFormComplete || submitting}
+                  >
                     {submitting ? "Sende..." : "Tipp absenden"}
                   </button>
                 </form>

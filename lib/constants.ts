@@ -1,8 +1,19 @@
 export const PROJECT_TITLE = "Tobis Superbowl Tippspiel";
 
+export const TEAMS = {
+  patriots: {
+    name: "New England Patriots",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/d/da/NFL_New_England_Patriots.svg"
+  },
+  seahawks: {
+    name: "Seattle Seahawks",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/1/11/NFL_Seattle_Seahawks.svg"
+  }
+} as const;
+
 export const GAME = {
   event: "Super Bowl LX (60)",
-  teams: "New England Patriots vs Seattle Seahawks",
+  teams: `${TEAMS.patriots.name} vs ${TEAMS.seahawks.name}`,
   date: "Sonntag, 8. Februar 2026",
   overUnder: 45.5
 };
