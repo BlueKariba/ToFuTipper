@@ -43,18 +43,27 @@ export async function GET() {
     to: "J1"
   };
 
-  const hasResults =
+  const scoringResults =
     results &&
     results.winner &&
     results.overUnder &&
     results.mvp &&
     results.receiving &&
     results.rushing &&
-    results.badBunny;
+    results.badBunny
+      ? {
+          winner: results.winner,
+          overUnder: results.overUnder,
+          mvp: results.mvp,
+          receiving: results.receiving,
+          rushing: results.rushing,
+          badBunny: results.badBunny
+        }
+      : null;
 
   submissions.forEach((submission) => {
-    const score = hasResults
-      ? scoreSubmission(submission, results).total
+    const score = scoringResults
+      ? scoreSubmission(submission, scoringResults).total
       : "";
 
     sheet.addRow({
