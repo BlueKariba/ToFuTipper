@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Submission {
+  id             String   @id @default(cuid())
+  name           String
+  nameNormalized String   @unique
+  winner         String
+  overUnder      String
+  mvp            String
+  receiving      String
+  rushing        String
+  badBunny       String
+  patriotsLove   String
+  createdAt      DateTime @default(now())
+}
+
+model Result {
+  id         String   @id
+  winner     String?
+  overUnder  String?
+  mvp        String?
+  receiving  String?
+  rushing    String?
+  badBunny   String?
+  lockedAt   DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model AdminSession {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+}

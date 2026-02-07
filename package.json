@@ -1,0 +1,42 @@
+{
+  "name": "tobis-superbowl-tippspiel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tobis Superbowl Tippspiel – Patriots-themed Super Bowl LX predictions game.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postinstall": "node scripts/prisma.mjs generate",
+    "test": "cross-env DATABASE_URL=file:./prisma/test.db NODE_ENV=test node scripts/prisma.mjs migrate deploy && cross-env DATABASE_URL=file:./prisma/test.db NODE_ENV=test playwright test",
+    "test:ui": "cross-env DATABASE_URL=file:./prisma/test.db NODE_ENV=test playwright test --ui",
+    "prisma:generate": "node scripts/prisma.mjs generate",
+    "prisma:migrate:dev": "node scripts/prisma.mjs migrate dev",
+    "prisma:migrate:deploy": "node scripts/prisma.mjs migrate deploy",
+    "prisma:studio": "node scripts/prisma.mjs studio"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.9.1",
+    "clsx": "^2.1.1",
+    "exceljs": "^4.4.0",
+    "next": "^14.2.12",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^20.14.15",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.20",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.12",
+    "postcss": "^8.4.41",
+    "prisma": "^5.9.1",
+    "tailwindcss": "^3.4.10",
+    "typescript": "^5.5.4"
+  }
+}
