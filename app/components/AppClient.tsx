@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import {
   CATEGORY_LABELS,
@@ -113,6 +114,7 @@ function buildTopItems(
 }
 
 export default function AppClient() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<"tippen" | "gesamt">("tippen");
   const [form, setForm] = useState<SubmissionFormState>(initialForm);
   const [overview, setOverview] = useState<OverviewData | null>(null);
@@ -121,6 +123,9 @@ export default function AppClient() {
   const [success, setSuccess] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [adminPassword, setAdminPassword] = useState("");
+  const [adminError, setAdminError] = useState<string | null>(null);
+  const [adminLoading, setAdminLoading] = useState(false);
   const [showAll, setShowAll] = useState<Record<string, boolean>>({
     mvp: false,
     receiving: false,
@@ -201,6 +206,30 @@ export default function AppClient() {
     await Promise.all([loadOverview(), loadMe()]);
     setActiveTab("gesamt");
     setSubmitting(false);
+  };
+
+  const handleAdminLogin = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setAdminLoading(true);
+    setAdminError(null);
+
+    const res = await fetch("/api/admin/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password: adminPassword })
+    });
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      const message =
+        typeof data?.error === "string" ? data.error : "Login fehlgeschlagen.";
+      setAdminError(message);
+      setAdminLoading(false);
+      return;
+    }
+
+    router.push("/admin");
+    router.refresh();
   };
 
   const hasResults = Boolean(overview?.results);
@@ -818,6 +847,40 @@ export default function AppClient() {
         {loading ? (
           <p className="text-center text-white/70">Lade Daten...</p>
         ) : null}
+
+        <div className="flex justify-end">
+          <form
+            onSubmit={handleAdminLogin}
+            className="flex flex-col items-end gap-2 text-white/70"
+          >
+            <div className="flex items-end gap-2">
+              <label
+                htmlFor="admin-pass"
+                className="text-xs uppercase tracking-[0.3em] text-white/60"
+              >
+                admin
+              </label>
+              <input
+                id="admin-pass"
+                type="password"
+                className="input w-40 py-2 text-sm"
+                value={adminPassword}
+                onChange={(event) => setAdminPassword(event.target.value)}
+                placeholder="admin"
+              />
+              <button
+                className="btn-secondary py-2 text-sm"
+                type="submit"
+                disabled={adminLoading || adminPassword.length === 0}
+              >
+                {adminLoading ? "..." : "Login"}
+              </button>
+            </div>
+            {adminError ? (
+              <p className="text-xs text-patriots-red">{adminError}</p>
+            ) : null}
+          </form>
+        </div>
       </div>
     </main>
   );
