@@ -49,6 +49,7 @@ export const OPTIONS = {
     "Jake Bobo (SEA)",
     "AJ Barner (SEA)",
     "Elijah Arroyo (SEA)",
+    "Stefon Diggs (NE)",
     "Kayshon Boutte (NE)",
     "Hunter Henry (NE)",
     "Rhamondre Stevenson (NE)",
