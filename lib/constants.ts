@@ -31,7 +31,16 @@ export const OPTIONS = {
     "AJ Barner (SEA, TE)",
     "Elijah Arroyo (SEA, TE)",
     "Rhamondre Stevenson (NE, RB)",
-    "Kayshon Boutte (NE, WR)"
+    "Kayshon Boutte (NE, WR)",
+    "Stefon Diggs (NE, WR)",
+    "Nick Emmanwori (SEA, S)",
+    "Leonard Williams (SEA, DT)",
+    "Hunter Henry (NE, TE)",
+    "Marcus Jones (NE, CB/RS)",
+    "Jason Myers (SEA, K)",
+    "DeMarcus Lawrence (SEA, DE)",
+    "Devon Witherspoon (SEA, CB)",
+    "Byron Murphy II (SEA, DT)"
   ],
   receiving: [
     "Jaxon Smith-Njigba (SEA)",
